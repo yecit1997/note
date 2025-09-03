@@ -28,7 +28,7 @@ DJANGO_APPS = [
 ]
 
 LOCAL_APPS = [
-    '_apps.nota.apps.NotaConfig',
+    'apps.nota',
 ]
 
 THIRD_PARTY_APPS = []

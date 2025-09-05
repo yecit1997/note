@@ -1,4 +1,26 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from . models import Nota
+from .forms import NotaForm
+from django.core.paginator import Paginator
 
 def index(request):
-    return render(request, 'index.html')
+    notas = Nota.objects.all()
+    paginador = Paginator(notas, 6)
+    
+    numero_pagina = request.GET.get('page')
+    page_obj = paginador.get_page(numero_pagina)
+
+    context = {'page_obj': page_obj}
+    return render(request, 'notas/index.html', context)
+
+
+def crear_nota(request):
+    if request.method == 'POST':
+        form = NotaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('nota:index')
+    else:
+        form = NotaForm()
+    context = {'form': form}
+    return render(request, 'notas/crear_nota.html', context)

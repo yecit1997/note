@@ -1,0 +1,12 @@
+<div class="col">
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title">{{ nota.titulo|truncatewords:3 }}</h5>
+            <p class="card-text">{{ nota.contenido|truncatewords:10 }}</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-body-secondary">{{ nota.fecha_creacion|date:"Y-m-d" }}</small>
+        </div>
+    </div>
+</div>
+

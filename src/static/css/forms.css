@@ -1,0 +1,20 @@
+#titulo{
+    border-radius: 50px;
+}
+#contenido{
+    /* border-radius: 50px; */
+    background: rgba(255, 255, 255, 0.781); 
+
+}
+#btn-guardar{
+    border-radius: 50px;
+
+}
+#btn-guardar:hover{
+    background-color: rgb(0, 39, 75);
+    color: white;
+}
+#btn-guardar:active{
+    background-color: rgb(255, 255, 255);
+    color: black;
+}

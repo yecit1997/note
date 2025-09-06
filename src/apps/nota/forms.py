@@ -7,8 +7,8 @@ class NotaForm(forms.ModelForm):
         model = Nota
         fields = ['titulo', 'contenido']
         widgets = {
-            'titulo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Título de la nota'}),
-            'contenido': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Contenido de la nota'}),
+            'titulo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Título de la nota', 'id': 'titulo'}),
+            'contenido': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Contenido de la nota', 'id': 'contenido'}),
         }
         labels = {
             'titulo': '',

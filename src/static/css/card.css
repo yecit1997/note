@@ -1,0 +1,6 @@
+.card-hover:hover {
+    transform: translateY(-5px); /* Desplaza la tarjeta hacia arriba */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Añade una sombra para un efecto 3D */
+    cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+    transition: all 0.3s ease-in-out; /* Suaviza la transición */
+}

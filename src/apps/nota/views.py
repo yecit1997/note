@@ -19,8 +19,16 @@ def crear_nota(request):
         form = NotaForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('nota:index')
+            return redirect('index')
     else:
         form = NotaForm()
     context = {'form': form}
     return render(request, 'notas/crear_nota.html', context)
+
+
+def detalle_nota(request, pk):
+    nota = Nota.objects.get(id=pk)
+    context = {'nota': nota}
+    print(nota.pk)
+    return render(request, 'notas/detalle_nota.html', context)
+    # return redirect('index')

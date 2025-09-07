@@ -1,18 +1,22 @@
 {% load static %}
-{% comment %} <div class="col">
-    <a href="{% url 'detalle' obj.id %}" class="text-decoration-none text-dark">
-        <div class="card h-100 card-hover">
-            <div class="card-body">
-                <h5 class="card-title">{{ obj.titulo|truncatewords:3 }}</h5>
-                <p class="card-text">{{ obj.contenido|truncatewords:10 }}</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-body-secondary">{{ obj.fecha_creacion|date:"Y-m-d" }}</small>
-            </div>
-        </div>
-    </a>
-</div> {% endcomment %}
+<style>
+    #dropdown {
+        min-width: 20px; /* Ancho mínimo para el menú desplegable */
+    }
 
+    #editar, #eliminar {
+        cursor: pointer;
+    }
+
+    #editar:hover {
+        color: #03204dff;
+    }
+
+    #eliminar:hover {
+        color: #250004ff;
+    }
+   
+</style>
 
 <div class="col">
     <div class="card h-100 shadow-sm border-0 rounded-3 card-hover">
@@ -22,15 +26,15 @@
                     <i class="bi bi-three-dots-vertical"></i>
                 </a>
 
-                <ul class="dropdown-menu">
+                <ul id="dropdown" class="dropdown-menu">
                     <li>
-                        {% comment %} <a class="dropdown-item" href="{% url 'nota:editar' obj.id %}"> {% endcomment %}
-                            <i class="bi bi-pencil-square me-2"></i>Editar
+                        <a id="editar" class="dropdown-item text-info" href="{% url 'editar' nota.id %}">
+                            <i class="bi bi-pencil-square me-2"></i>
                         </a>
                     </li>
                     <li>
-                        {% comment %} <a class="dropdown-item text-danger" href="{% url 'nota:eliminar' obj.id %}"> {% endcomment %}
-                            <i class="bi bi-trash-fill me-2"></i>Eliminar
+                        <a id="eliminar" class="dropdown-item text-danger" href="#">
+                            <i class="bi bi-trash-fill me-2"></i>
                         </a>
                     </li>
                 </ul>

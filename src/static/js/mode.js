@@ -1,23 +1,19 @@
-let claro = 'bg-light text-dark';
-let oscuro = 'bg-dark text-light';
-
-let btnMode = document.getElementById('btn-mode');
 let body = document.getElementById('body');
+let btnMode = document.getElementById('btn-mode');
 
-
+// Obtiene el modo del almacenamiento local
 const mode = localStorage.getItem('mode');
-if (mode) {
-    body.className = mode;
-} else {
-    body.className = oscuro;
+if (mode === 'dark-mode') {
+    body.classList.add('dark-mode');
 }
 
 btnMode.addEventListener('click', function() {
-    if (body.className === oscuro) {
-        body.className = claro;
-        localStorage.setItem('mode', claro);
+    // Alterna la clase 'dark-mode'
+    if (body.classList.contains('dark-mode')) {
+        body.classList.remove('dark-mode');
+        localStorage.setItem('mode', 'light-mode');
     } else {
-        body.className = oscuro;
-        localStorage.setItem('mode', oscuro);
+        body.classList.add('dark-mode');
+        localStorage.setItem('mode', 'dark-mode');
     }
 });

@@ -32,3 +32,16 @@ def detalle_nota(request, pk):
     print(nota.pk)
     return render(request, 'notas/detalle_nota.html', context)
     # return redirect('index')
+
+def editar_nota(request, pk):
+    nota = Nota.objects.get(id=pk)
+    if request.method == 'POST':
+        form = NotaForm(request.POST, instance=nota)
+        if form.is_valid():
+            form.save()
+            
+            return redirect('index')
+    else:
+        form = NotaForm(instance=nota)
+    context = {'form': form}
+    return render(request, 'notas/crear_nota.html', context)

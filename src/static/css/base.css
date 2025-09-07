@@ -1,0 +1,27 @@
+/* Paleta de colores base */
+:root {
+
+    background-image: linear-gradient(135deg, #0f2027, #33545f, #0c4c68);
+}
+
+/* Modo oscuro */
+.dark-mode {
+    background-image: linear-gradient(135deg, #0a171d, #0c2127, #031c27);
+}
+
+
+/* Aplica las variables a los elementos de tu página */
+#body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    transition: background-color 0.5s, color 0.5s; /* Transición suave */
+}
+
+.card {
+    background-color: var(--color-card-bg);
+    color: var(--color-text-primary);
+}
+
+a {
+    color: var(--color-link);
+}

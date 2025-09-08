@@ -22,6 +22,18 @@
     <div class="card h-100 shadow-sm border-0 rounded-3 card-hover">
         <div class="card-body d-flex flex-column">
             <div class="dropdown position-absolute top-0 end-0 mt-2 me-2">
+                
+                <!-- Favorito -->
+                
+                {% if es_favorito %}
+                    <i id="favorito-{{ obj.id }}"
+                        class="bi {% if obj.favorito %}bi-star-fill {% else %}bi-star{% endif %} fs-5 me-2 favorito-btn"
+                        data-note-id="{{ obj.id }}"
+                        style="cursor: pointer;">
+                    </i>
+                {% endif %}
+                    
+                <!-- Menú desplegable -->
                 <a class="btn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-three-dots-vertical"></i>
                 </a>
@@ -39,13 +51,13 @@
                     </li>
                 </ul>
             </div>
-
+            <!-- Titulo y contenido -->
             <a href="{% url 'detalle' obj.id %}" class="card-link text-decoration-none">
-                <h5 class="card-title fw-bold text-truncate">{{ obj.titulo|truncatewords:3 }}</h5>
+                <h5 class="card-title fw-bold text-truncate">{{ obj.titulo|truncatewords:2 }}</h5>
                 <p class="card-text text-muted mb-auto">{{ obj.contenido|truncatewords:10 }}</p>
             </a>
         </div>
-
+        <!-- Fecha de creación -->
         <div class="card-footer bg-light border-0 pt-0">
             <small class="text-body-secondary d-block text-end">
                 <i class="bi bi-calendar me-1"></i> {{ obj.fecha_creacion|date:"Y-m-d" }}

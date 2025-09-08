@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Nota
 from .forms import NotaForm
 from django.core.paginator import Paginator
 from django.contrib import messages
+from django.http import JsonResponse
+
 
 # Create function to show all notes
 def index(request):
@@ -12,8 +14,12 @@ def index(request):
     numero_pagina = request.GET.get("page")
     page_obj = paginador.get_page(numero_pagina)
 
-    context = {"page_obj": page_obj}
+    context = {
+        "page_obj": page_obj, 
+        "es_favorito": True
+    }
     return render(request, "notas/index.html", context)
+
 
 # Create function to create notes
 def crear_nota(request):
@@ -28,6 +34,7 @@ def crear_nota(request):
     context = {"form": form}
     return render(request, "notas/crear_nota.html", context)
 
+
 # Create function to see note details
 def detalle_nota(request, pk):
     nota = Nota.objects.get(id=pk)
@@ -36,6 +43,7 @@ def detalle_nota(request, pk):
     return render(request, "notas/detalle_nota.html", context)
     # return redirect('index')
 
+
 # Create funtion to edit notes
 def editar_nota(request, pk):
     nota = Nota.objects.get(id=pk)
@@ -43,12 +51,13 @@ def editar_nota(request, pk):
         form = NotaForm(request.POST, instance=nota)
         if form.is_valid():
             form.save()
-            messages.success(request, "Nota editada con éxito.")
+            messages.info(request, "Nota editada con éxito.")
             return redirect("index")
     else:
         form = NotaForm(instance=nota)
     context = {"form": form}
     return render(request, "notas/crear_nota.html", context)
+
 
 # Create function to delete notes
 def eliminar_nota(request, pk):
@@ -59,3 +68,23 @@ def eliminar_nota(request, pk):
         return redirect("index")
     context = {"nota": nota}
     return render(request, "notas/eliminar_nota.html", context)
+
+
+# Create function to add a favorite note or remove it
+def add_favorito(request, nota_id):
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+        nota = get_object_or_404(Nota, id=nota_id)
+        nota.favorito = not nota.favorito
+        nota.save()
+        return JsonResponse({"favorito": nota.favorito})
+    return JsonResponse({"error": "Invalid request"}, status=400)
+
+
+# Create funtion for view all notes marked as favorite
+def all_favoritos(request):
+    notas_favoritas = Nota.objects.filter(favorito=True)
+    context = {
+        "notas_favoritas": notas_favoritas, 
+        "es_favorito": False
+    }
+    return render(request, "notas/all_favoritos.html", context)

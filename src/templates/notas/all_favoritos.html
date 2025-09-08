@@ -1,0 +1,11 @@
+{% extends 'base/head.html' %}
+{% block content %}
+  <h1 class="text-warning">FAVORITOS</h1>
+  <div class="container mt-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for nota in notas_favoritas %}
+        {% include 'components/card.html' with obj=nota %}
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

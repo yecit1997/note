@@ -3,6 +3,7 @@ from django.db import models
 class Nota(models.Model):
     titulo = models.CharField(max_length=100)
     contenido = models.TextField()
+    favorito = models.BooleanField(default=False)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
     
